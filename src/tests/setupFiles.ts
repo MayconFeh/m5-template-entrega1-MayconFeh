@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import supertest from "supertest";
 import { beforeEach } from "vitest";
 import { app } from "../app";
@@ -7,6 +8,7 @@ export const request = supertest(app);
 
 beforeEach(async () => {
   await prisma.$transaction([
+    prisma.user.deleteMany(),
     prisma.category.deleteMany(),
     prisma.task.deleteMany(),
   ]);
